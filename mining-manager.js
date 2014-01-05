@@ -1,14 +1,41 @@
+TILEWIDTH = 64
 
+function init() {
 
-function mining_manager()
+	ctx = $('#canvas')[0].getContext("2d");
+	WIDTH = $("#canvas").width();
+	HEIGHT = $("#canvas").height();
+	NCOLS = TILEWIDTH / WIDTH;
+	NROWS = TILEWIDTH / HEIGHT;
+	canvasMinX = $("#canvas").offset().left;
+	canvasMaxX = canvasMinX + WIDTH
+	intervalId =  setInterval(draw, 10);
+	console.log(TILEWIDTH);
+    }
+
+function drawBackground()
 {
-	var gameCanvas = document.getElementById('canvas');
-	var context = gameCanvas.getContext('2d');
-	context.fillStyle = 'red';
-	context.fillRect(30, 30, 50, 50);
+	for (i = 0;i < NCOLS;i++)
+	{
+		tilex = TILEWIDTH * i;
+		//console.log(tilex);
+		for (j = 0;j < NROWS;j++)
+		{
+			
+			tiley = TILEWIDTH * j;
+			ctx.fillStyle = 'red';
+			ctx.fillRect(tilex + 200, tiley + 200, 10, 10);
+			ctx.drawImage(document.getElementById('background'), 0, 0, 32, 32, tilex, tiley, TILEWIDTH, TILEWIDTH);
+		}
+	}
+	
 }
- $(document).ready(function(){
-     mining_manager();
-	 
-    });
- 2 + 2
+
+function draw()
+{
+	//ctx = $('#canvas')[0].getContext("2d");
+	drawBackground();
+	
+
+
+}
